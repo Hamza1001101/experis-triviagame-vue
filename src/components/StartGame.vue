@@ -25,19 +25,23 @@
           <label class="custom-select" for="difficulty">
             <select id="difficulty" name="options" v-model="difficulty">
               <option value="">Select Difficulty</option>
-              <option >Easy</option>
-              <option >Medium</option>
-              <option >Hard</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
             </select></label
           >
         </div>
         <div class="category">
           <label class="custom-select" for="category">
-            <select id="category" name="options" v-model="category">
+            <select id="category" v-model="category">
               <option value="">Select Category</option>
-              <option >General Knowledge</option>
-              <option >Film</option>
-              <option >Entartainment</option>
+              <option
+                v-for="category in categories"
+                :key="category.id"
+            >
+              
+                {{ category.name}}
+              </option>
             </select></label
           >
         </div>
@@ -52,16 +56,20 @@
             </select></label
           >
         </div>-->
-         <label class="custom-select" for="num-of-questions">
-        <input id="num-of-questions"
-         placeholder="Number of questions" 
-         min="1" 
-         type="number" 
-         v-model.number="numberOfQuestions">
-         </label>
+        <label class="custom-select" for="num-of-questions">
+          <input
+            id="num-of-questions"
+            placeholder="Number of questions"
+            min="1"
+            type="number"
+            v-model.number="numberOfQuestions"
+          />
+        </label>
         <button>Start Game</button>
       </form>
+
     </div>
+
   </div>
 </template>
 
@@ -71,9 +79,10 @@ export default {
     data() {
         return {
             questions: [],
+            categories: [],
             category: '',
             difficulty: '',
-            numberOfQuestions: null 
+            numberOfQuestions: null
         }
     },
     created() {
@@ -81,13 +90,17 @@ export default {
     },
     methods: {
         async getQuestions() {
-            const resp = await fetch('https://opentdb.com/api.php?amount=10&category=10&difficulty=medium')
+            const resp = await fetch('https://opentdb.com/api_category.php')
             //const resp = await fetch(`'https://opentdb.com/api.php?amount=${this.numberOfQuestions}&category=${this.category}&difficulty=${this.difficulty}'`)
             const data = await resp.json()
-            this.questions = data.results
-            this.questions.map(quest => console.log(quest.question))
+            this.categories = data.trivia_categories
+
+            console.log(this.categories)
         },
           onSubmit() {
+              if(this.category == '' || this.difficulty=== '' || this.numberOfQuestions=== null) {
+                 return alert('The query is incomplete. Please fill out every field.')
+              }
              let gameParams = {
              difficulty : this.difficulty,
              category: this.category,
@@ -137,7 +150,8 @@ export default {
 
 /*********Form ********** */
 
-select, input  {
+select,
+input {
   padding: 12px;
   width: 14rem;
   background-color: #cedada;
