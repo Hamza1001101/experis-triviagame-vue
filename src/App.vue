@@ -4,7 +4,7 @@
 
   <StartGame @review-submitted='addReview'>  </StartGame> 
   
-  <li v-for="review in reviews" :key="review"> {{review}} </li>
+  <li v-for="query in queries" :key="query"> {{query}} </li>
 </template>
 
 <script>
@@ -22,15 +22,15 @@ export default {
   },
   data() {
    return {
-     reviews: []
+     queries: []
    }
   },
   methods: {
-    addReview(review) {
-      this.reviews.push(review)
+    addReview(query) {
+      this.queries.push(query)
     }
   }
-}
+} 
 </script>
 
 <style>
