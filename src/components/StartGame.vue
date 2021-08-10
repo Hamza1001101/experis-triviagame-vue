@@ -46,16 +46,7 @@
           >
         </div>
 
-        <!--<div class="num-of-questions">
-          <label class="custom-select" for="num-of-questions">
-            <select id="num-of-questions" name="options" v-model.number="numberOfQuestions">
-              <option value="">Select number of Questions</option>
-              <option >1</option>
-              <option >3</option>
-              <option >2</option>
-            </select></label
-          >
-        </div>-->
+     
         <label class="custom-select" for="num-of-questions">
           <input
             id="num-of-questions"
