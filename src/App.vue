@@ -1,20 +1,34 @@
 <template>
 
 
-  <StartGame />
+
+  <StartGame @review-submitted='addReview'>  </StartGame> 
+  
+  <li v-for="review in reviews" :key="review"> {{review}} </li>
 </template>
 
 <script>
 
 import StartGame from './components/StartGame.vue'
-
+//import Form from './components/Form.vue'
 
 export default {
   name: 'App',
   components: {
 
     StartGame, 
-  
+   // Form
+
+  },
+  data() {
+   return {
+     reviews: []
+   }
+  },
+  methods: {
+    addReview(review) {
+      this.reviews.push(review)
+    }
   }
 }
 </script>

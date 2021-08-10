@@ -20,39 +20,45 @@
     </nav>
 
     <div>
-      <form class="form-wrapper" action="#">
+      <form class="form-wrapper" @submit.prevent="onSubmit">
         <div class="difficulty">
-          <label class="custom-select" for="styledSelect1">
-            <select id="styledSelect1" name="options">
+          <label class="custom-select" for="difficulty">
+            <select id="difficulty" name="options" v-model="difficulty">
               <option value="">Select Difficulty</option>
-              <option value="1">Easy</option>
-              <option value="2">Medium</option>
-              <option value="3">Hard</option>
+              <option >Easy</option>
+              <option >Medium</option>
+              <option >Hard</option>
             </select></label
           >
         </div>
         <div class="category">
-          <label class="custom-select" for="styledSelect1">
-            <select id="styledSelect1" name="options">
+          <label class="custom-select" for="category">
+            <select id="category" name="options" v-model="category">
               <option value="">Select Category</option>
-              <option value="1">Easy</option>
-              <option value="2">Medium</option>
-              <option value="3">Hard</option>
+              <option >General Knowledge</option>
+              <option >Film</option>
+              <option >Entartainment</option>
             </select></label
           >
         </div>
 
-        <div class="num-of-questions">
-          <label class="custom-select" for="styledSelect1">
-            <select id="styledSelect1" name="options">
+        <!--<div class="num-of-questions">
+          <label class="custom-select" for="num-of-questions">
+            <select id="num-of-questions" name="options" v-model.number="numberOfQuestions">
               <option value="">Select number of Questions</option>
-              <option value="1">Easy</option>
-              <option value="2">Medium</option>
-              <option value="3">Hard</option>
+              <option >1</option>
+              <option >3</option>
+              <option >2</option>
             </select></label
           >
-        </div>
-
+        </div>-->
+         <label class="custom-select" for="num-of-questions">
+        <input id="num-of-questions"
+         placeholder="Number of questions" 
+         min="1" 
+         type="number" 
+         v-model.number="numberOfQuestions">
+         </label>
         <button>Start Game</button>
       </form>
     </div>
@@ -64,7 +70,10 @@ export default {
     name: 'StartGame',
     data() {
         return {
-            questions: []
+            questions: [],
+            category: '',
+            difficulty: '',
+            numberOfQuestions: null 
         }
     },
     created() {
@@ -73,8 +82,23 @@ export default {
     methods: {
         async getQuestions() {
             const resp = await fetch('https://opentdb.com/api.php?amount=10&category=10&difficulty=medium')
+            //const resp = await fetch(`'https://opentdb.com/api.php?amount=${this.numberOfQuestions}&category=${this.category}&difficulty=${this.difficulty}'`)
             const data = await resp.json()
             this.questions = data.results
+            this.questions.map(quest => console.log(quest.question))
+        },
+          onSubmit() {
+             let gameParams = {
+             difficulty : this.difficulty,
+             category: this.category,
+             numberOfQuestions: this.numberOfQuestions
+
+      }
+      this.$emit('review-submitted', gameParams)
+
+      this.category = ''
+      this.difficulty = ''
+      this.numberOfQuestions = null
 
         }
     },
@@ -113,9 +137,11 @@ export default {
 
 /*********Form ********** */
 
-select {
+select, input  {
   padding: 12px;
   width: 14rem;
+  background-color: #cedada;
+  border: none;
 }
 
 .form-wrapper {
