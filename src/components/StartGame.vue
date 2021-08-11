@@ -42,16 +42,6 @@
           >
         </div>
 
-        <!--<div class="num-of-questions">
-          <label class="custom-select" for="num-of-questions">
-            <select id="num-of-questions" name="options" v-model.number="numberOfQuestions">
-              <option value="">Select number of Questions</option>
-              <option >1</option>
-              <option >3</option>
-              <option >2</option>
-            </select></label
-          >
-        </div>-->
         <label class="custom-select" for="num-of-questions">
           <input
             id="num-of-questions"
@@ -70,6 +60,7 @@
 <script>
 export default {
   name: "StartGame",
+
   data() {
     return {
       questions: [],
@@ -80,12 +71,11 @@ export default {
     };
   },
   created() {
-    this.getQuestions();
+    this.getCategories();
   },
   methods: {
-    async getQuestions() {
+    async getCategories() {
       const resp = await fetch("https://opentdb.com/api_category.php");
-      //const resp = await fetch(`'https://opentdb.com/api.php?amount=${this.numberOfQuestions}&category=${this.category}&difficulty=${this.difficulty}'`)
       const data = await resp.json();
       this.categories = data.trivia_categories;
     },
@@ -105,7 +95,7 @@ export default {
       //send data to the parent component (App.vue)
       this.$emit("review-submitted", gameParams);
 
-      this.dataParams();
+      this.fetchQuestions();
 
       //clear out data
       this.category = "";
@@ -113,8 +103,8 @@ export default {
       this.numberOfQuestions = null;
     },
 
-    async dataParams() {
-      let level = this.test().toLowerCase();
+    async fetchQuestions() {
+      let level = this.getLevel().toLowerCase();
       let limit = this.numberOfQuestions;
       let categoryId;
       this.categories.forEach((cate) => {
@@ -127,13 +117,10 @@ export default {
         `https://opentdb.com/api.php?amount=${limit}&category=${categoryId}&difficulty=${level}`
       );
       const data = await resp.json();
-      console.log(data);
-
-      console.log("the level is= " + level);
-
-      //console.log( this.difficulty)
+      this.questions = data;
+      console.log(this.questions.results);
     },
-    test() {
+    getLevel() {
       return this.difficulty;
     },
   },
