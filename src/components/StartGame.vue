@@ -35,18 +35,23 @@
           <label class="custom-select" for="category">
             <select id="category" v-model="category">
               <option value="">Select Category</option>
-              <option
-                v-for="category in categories"
-                :key="category.id"
-            >
-              
-                {{ category.name}}
+              <option v-for="category in categories" :key="category.id">
+                {{ category.name }}
               </option>
             </select></label
           >
         </div>
 
-     
+        <!--<div class="num-of-questions">
+          <label class="custom-select" for="num-of-questions">
+            <select id="num-of-questions" name="options" v-model.number="numberOfQuestions">
+              <option value="">Select number of Questions</option>
+              <option >1</option>
+              <option >3</option>
+              <option >2</option>
+            </select></label
+          >
+        </div>-->
         <label class="custom-select" for="num-of-questions">
           <input
             id="num-of-questions"
@@ -58,58 +63,81 @@
         </label>
         <button>Start Game</button>
       </form>
-
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-    name: 'StartGame',
-    data() {
-        return {
-            questions: [],
-            categories: [],
-            category: '',
-            difficulty: '',
-            numberOfQuestions: null
-        }
+  name: "StartGame",
+  data() {
+    return {
+      questions: [],
+      categories: [],
+      category: "",
+      difficulty: "",
+      numberOfQuestions: null,
+    };
+  },
+  created() {
+    this.getQuestions();
+  },
+  methods: {
+    async getQuestions() {
+      const resp = await fetch("https://opentdb.com/api_category.php");
+      //const resp = await fetch(`'https://opentdb.com/api.php?amount=${this.numberOfQuestions}&category=${this.category}&difficulty=${this.difficulty}'`)
+      const data = await resp.json();
+      this.categories = data.trivia_categories;
     },
-    created() {
-        this.getQuestions()
-    },
-    methods: {
-        async getQuestions() {
-            const resp = await fetch('https://opentdb.com/api_category.php')
-            //const resp = await fetch(`'https://opentdb.com/api.php?amount=${this.numberOfQuestions}&category=${this.category}&difficulty=${this.difficulty}'`)
-            const data = await resp.json()
-            this.categories = data.trivia_categories
-
-            console.log(this.categories)
-        },
-          onSubmit() {
-              if(this.category == '' || this.difficulty=== '' || this.numberOfQuestions=== null) {
-                 return alert('The query is incomplete. Please fill out every field.')
-              }
-             let gameParams = {
-             difficulty : this.difficulty,
-             category: this.category,
-             numberOfQuestions: this.numberOfQuestions
-
+    onSubmit() {
+      if (
+        this.category == "" ||
+        this.difficulty === "" ||
+        this.numberOfQuestions === null
+      ) {
+        return alert("The query is incomplete. Please fill out every field.");
       }
-      this.$emit('review-submitted', gameParams)
+      let gameParams = {
+        difficulty: this.difficulty,
+        category: this.category,
+        numberOfQuestions: this.numberOfQuestions,
+      };
+      //send data to the parent component (App.vue)
+      this.$emit("review-submitted", gameParams);
 
-      this.category = ''
-      this.difficulty = ''
-      this.numberOfQuestions = null
+      this.dataParams();
 
-        }
+      //clear out data
+      this.category = "";
+      this.difficulty = "";
+      this.numberOfQuestions = null;
     },
 
+    async dataParams() {
+      let level = this.test().toLowerCase();
+      let limit = this.numberOfQuestions;
+      let categoryId;
+      this.categories.forEach((cate) => {
+        if (this.category === cate.name) {
+          //console.log(cate.id)
+          categoryId = cate.id;
+        }
+      });
+      const resp = await fetch(
+        `https://opentdb.com/api.php?amount=${limit}&category=${categoryId}&difficulty=${level}`
+      );
+      const data = await resp.json();
+      console.log(data);
 
+      console.log("the level is= " + level);
 
-}
+      //console.log( this.difficulty)
+    },
+    test() {
+      return this.difficulty;
+    },
+  },
+};
 </script>
 <style scoped>
 .container {
