@@ -51,6 +51,7 @@ export default {
   async created() {
     await this.getCategories();
   },
+
   methods: {
     async getCategories() {
       const resp = await fetch("https://opentdb.com/api_category.php");
@@ -71,7 +72,7 @@ export default {
         numberOfQuestions: this.numberOfQuestions,
       };
       //send data to the parent component (App.vue)
-      this.$emit("review-submitted", gameParams);
+      this.$emit("params-submitted", gameParams);
 
       this.fetchQuestions();
 
@@ -96,6 +97,10 @@ export default {
       );
       const data = await resp.json();
       this.questions = data;
+
+      //data display
+      let dataquestions = this.questions.results;
+      this.$emit("questions-submitted", dataquestions);
       console.log(this.questions.results);
     },
     getLevel() {

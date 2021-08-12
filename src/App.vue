@@ -1,9 +1,11 @@
 <template>
   <div class="container">
     <Nav />
-    <StartGame @review-submitted="addReview"> </StartGame>
+    <h1 class="header">Welcome Trivia App</h1>
+    <StartGame @params-submitted="addParam" @questions-submitted="showData">
+    </StartGame>
 
-    <li v-for="query in queries" :key="query">{{ query }}</li>
+    <li v-for="query in questions" :key="query">{{ query }}</li>
   </div>
 </template>
 <script>
@@ -15,16 +17,21 @@ export default {
   components: {
     Nav,
     StartGame,
+
     // Form
   },
   data() {
     return {
       queries: [],
+      questions: [],
     };
   },
   methods: {
-    addReview(query) {
+    addParam(query) {
       this.queries.push(query);
+    },
+    showData(query) {
+      this.questions.push(query);
     },
   },
 };
@@ -48,5 +55,9 @@ li {
 }
 .container {
   padding: 4rem;
+}
+.header {
+  text-align: center;
+  margin-top: 4rem;
 }
 </style>
