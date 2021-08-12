@@ -95,13 +95,22 @@ export default {
       const resp = await fetch(
         `https://opentdb.com/api.php?amount=${limit}&category=${categoryId}&difficulty=${level}`
       );
-      const data = await resp.json();
+      let jsonResponse = await resp.json();
+      // manipulate questions
+      let data = jsonResponse.results.map((question) => {
+        // put answers on question into single array
+        question.answers = [
+          question.correct_answer,
+          ...question.incorrect_answers,
+        ].sort(() => (Math.random() > 0.5 ? 1 : -1));
+        return question;
+      });
+      // put data on questions property
       this.questions = data;
-
       //data display
-      let dataquestions = this.questions.results;
+      let dataquestions = this.questions; //.results;
       this.$emit("questions-submitted", dataquestions);
-      console.log(this.questions.results);
+      console.log("modified questions", this.questions);
     },
     getLevel() {
       return this.difficulty;

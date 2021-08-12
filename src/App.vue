@@ -5,19 +5,20 @@
     <StartGame @params-submitted="addParam" @questions-submitted="showData">
     </StartGame>
 
-    <li v-for="query in questions" :key="query">{{ query }}</li>
+    <!-- <li v-for="query in questions" :key="query">{{ query }}</li>-->
+    <Questions :questionData="questions" />
   </div>
 </template>
 <script>
 import StartGame from "./components/StartGame.vue";
 import Nav from "./components/Nav.vue";
-
+import Questions from "./components/Questions.vue";
 export default {
   name: "App",
   components: {
     Nav,
     StartGame,
-
+    Questions,
     // Form
   },
   data() {
