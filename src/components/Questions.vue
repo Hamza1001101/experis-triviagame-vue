@@ -1,18 +1,8 @@
 <template>
   <div>
     <div class="quiz-container">
-      <!--<div v-for="question in questionData" :key="question">
-        <li v-for="q in question" :key="q">{{ q.question }}</li>
-        <li v-for="q in question" :key="q">
-          {{
-            [...q.incorrect_answers, q.correct_answer].sort(() =>
-              Math.random() > 0.5 ? 1 : -1
-            )
-          }}
-        </li>
-      </div>-->
-      <h4>Questions Component</h4>
       <div v-for="questions in quiz" :key="questions">
+        <h4>Questions Component</h4>
         <div v-for="(q, index) in questions" :key="q">
           <div class="q-wrapper" v-show="index === quizIndex">
             <p>{{ q.question }}</p>
@@ -22,6 +12,7 @@
               </button>
             </label>
 
+            <h4>{{ score() }}</h4>
             <!-- The two navigation buttons -->
             <!-- Note: prev is hidden on first question 
             <button v-if="questionIndex > 0" v-on:click="prev">prev</button>
@@ -43,6 +34,7 @@ export default {
     return {
       quiz: this.questionData,
       quizIndex: 0,
+      userResponses: Array(this.questionData.length).fill(false),
     };
   },
   methods: {
@@ -50,8 +42,11 @@ export default {
     next() {
       this.quizIndex++;
     },
-    prev() {
+    /*prev() {
       this.quizIndex--;
+    },*/
+    score() {
+      //console.log(this.quiz);
     },
   },
 };
