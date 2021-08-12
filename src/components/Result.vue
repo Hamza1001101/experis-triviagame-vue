@@ -1,8 +1,5 @@
 <template>
-  <div>
-
-  </div>
-
+  <div></div>
 </template>
 
 <script>
@@ -17,11 +14,8 @@ export default {
       nextQ: "",
     };
   },
-
-
-}
+};
 </script>
 
 <style scoped>
-
-</style>
+</style> 

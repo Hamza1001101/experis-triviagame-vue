@@ -11,17 +11,21 @@
           }}
         </li>
       </div>-->
+      <h4>Questions Component</h4>
       <div v-for="questions in quiz" :key="questions">
         <div v-for="(q, index) in questions" :key="q">
-          <div v-show="index === quizIndex">
+          <div class="q-wrapper" v-show="index === quizIndex">
             <p>{{ q.question }}</p>
-            <button v-for="m in q.answers" :key="m">
-              {{ m }}
-            </button>
+            <label class="answers" v-for="m in q.answers" :key="m">
+              <button v-on:click="next" class="button">
+                {{ m }}
+              </button>
+            </label>
+
             <!-- The two navigation buttons -->
-            <!-- Note: prev is hidden on first question -->
+            <!-- Note: prev is hidden on first question 
             <button v-if="questionIndex > 0" v-on:click="prev">prev</button>
-            <button v-on:click="next">next</button>
+            <button v-on:click="next">next</button>-->
           </div>
         </div>
       </div>
@@ -52,3 +56,29 @@ export default {
   },
 };
 </script>
+<style scoped>
+.q-wrapper {
+  border: 1px solid blue;
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 750px;
+}
+.button {
+  cursor: pointer;
+
+  display: inline-block;
+  background: #2274a5;
+  color: #fff;
+  border: 0;
+  padding: 12px;
+  margin-right: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.button:focus {
+  outline: none;
+}
+.button:hover {
+  transform: scale(0.98);
+}
+</style>
