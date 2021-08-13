@@ -46,7 +46,7 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: yellow;
+  background-color: #eceeef;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 a {
