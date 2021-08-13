@@ -12,12 +12,15 @@
 <script>
 import StartGame from "./components/StartGame.vue";
 import Nav from "./components/Nav.vue";
+
 import Questions from "./components/Questions.vue";
+
 export default {
   name: "App",
   components: {
     Nav,
     StartGame,
+
     Questions,
     // Form
   },

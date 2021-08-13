@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <form class="form-wrapper" @submit.prevent="onSubmit">
@@ -41,7 +42,7 @@ export default {
   name: "StartGame",
   data() {
     return {
-      questions: [],
+      questions: null,
       categories: [],
       category: "",
       difficulty: "",

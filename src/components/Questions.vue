@@ -7,7 +7,11 @@
           <div class="q-wrapper" v-show="index === quizIndex">
             <p>{{ q.question }}</p>
             <label class="answers" v-for="m in q.answers" :key="m">
-              <button v-on:click="next" class="button">
+              <button
+                v-on:click="next($event)"
+                v-bind:value="q.correct_answer"
+                class="button"
+              >
                 {{ m }}
               </button>
             </label>
@@ -28,26 +32,32 @@ export default {
   name: "Questions",
   props: {
     //attributesQuiz: [Object, Array],
-    questionData: [],
+    questionData: null,
   },
+
   data() {
     return {
       quiz: this.questionData,
       quizIndex: 0,
-      userResponses: Array(this.questionData.length).fill(false),
+      //userResponses: Array(this.questionData.length).fill(false),
+      clickedButton: null,
     };
   },
+
   methods: {
     //go to next page
-    next() {
+    next(e) {
       this.quizIndex++;
+      let correctAnswer = e.target.value;
+      let userResponse = e.target.innerText;
+
+      console.log("This is userResponse=", userResponse);
+      console.log("This is the correct answer", correctAnswer);
     },
     /*prev() {
       this.quizIndex--;
     },*/
-    score() {
-      //console.log(this.quiz);
-    },
+    score() {},
   },
 };
 </script>
