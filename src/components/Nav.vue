@@ -6,7 +6,7 @@
           <a href="#"> TriviaApp</a>
         </li>
       </ul>
-      <!-- <ul class="navbar">
+      <ul class="navbar">
         <li>
           <a href="#">Start</a>
         </li>
@@ -16,12 +16,14 @@
         <li>
           <a href="#">Results</a>
         </li>
-      </ul>-->
+      </ul>
     </nav>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "Nav",
+};
 </script>
 <style scoped>
 .nav {

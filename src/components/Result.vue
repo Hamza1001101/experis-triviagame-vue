@@ -54,12 +54,11 @@ export default {
 </script>
 <style scoped>
 .result-wrapper {
-  border: 1px solid blue;
   padding: 1rem;
-  margin-top: 3.5rem;
+  margin-top: 2rem;
 
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 0.5fr 1fr;
   grid-gap: 2rem;
 }
 .result-header {
@@ -67,9 +66,11 @@ export default {
   justify-self: center;
 }
 .questions-wrapper {
-  border: 1px red solid;
   padding: 1rem;
+  background-color: #f8f8ec;
+  box-shadow: 5px 5px 15px 5px #000000;
 }
+
 .q-button {
   background-color: rebeccapurple;
   margin: 2rem 0;
@@ -87,7 +88,10 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
 .score-wrapper {
-  border: 1px solid red;
+  box-shadow: 5px 5px 15px 5px #000000;
+  padding: 1rem;
+  background-color: #f8f8ec;
 }
 </style>

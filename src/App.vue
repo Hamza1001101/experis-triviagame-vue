@@ -1,42 +1,12 @@
 <template>
   <div class="container">
-    <Nav />
-    <h1 class="header">Welcome Trivia App</h1>
-    <StartGame @params-submitted="addParam" @questions-submitted="showData">
-    </StartGame>
-
-    <!-- <li v-for="query in questions" :key="query">{{ query }}</li>-->
-    <Questions :questionData="questions" />
+    <div><router-link class="logo" to="/">TrivaApp</router-link></div>
+    <router-view />
   </div>
 </template>
 <script>
-import StartGame from "./components/StartGame.vue";
-import Nav from "./components/Nav.vue";
-
-import Questions from "./components/Questions.vue";
-
 export default {
   name: "App",
-  components: {
-    Nav,
-    StartGame,
-    Questions,
-    // Form
-  },
-  data() {
-    return {
-      queries: [],
-      questions: [],
-    };
-  },
-  methods: {
-    addParam(query) {
-      this.queries.push(query);
-    },
-    showData(query) {
-      this.questions.push(query);
-    },
-  },
 };
 </script>
 
@@ -79,5 +49,9 @@ button:focus {
 }
 button:hover {
   transform: scale(0.98);
+}
+.logo {
+  color: #e55812;
+  font-weight: bold;
 }
 </style>

@@ -83,6 +83,7 @@ export default {
       this.$emit("params-submitted", gameParams);
 
       this.fetchQuestions();
+
       this.isClicked = true;
       //clear out data
       this.category = "";
@@ -119,10 +120,14 @@ export default {
       let dataquestions = this.questions; //.results;
       this.$emit("questions-submitted", dataquestions);
 
-      //console.log("modified questions", this.questions);
+      console.log("modified questions", this.questions);
+      //this.goToQuestions();
     },
     getLevel() {
       return this.difficulty;
+    },
+    goToQuestions() {
+      this.$router.push("./about");
     },
   },
 };

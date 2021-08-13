@@ -22,11 +22,6 @@
                 </button>
               </label>
             </div>
-
-            <!-- The two navigation buttons -->
-            <!-- Note: prev is hidden on first question 
-            <button v-if="questionIndex > 0" v-on:click="prev">prev</button>
-            <button v-on:click="next">next</button>-->
           </div>
         </div>
         <div v-if="quizIndex === questions.length">
@@ -49,7 +44,6 @@ export default {
     Result,
   },
   props: {
-    //attributesQuiz: [Object, Array],
     questionData: null,
   },
 
@@ -57,8 +51,7 @@ export default {
     return {
       quiz: this.questionData,
       quizIndex: 0,
-      //userResponses: Array(this.questionData.length).fill(false),
-      //clickedButton: null,
+
       score: 0,
       points: 0,
       numberOfQuestions: 0,
