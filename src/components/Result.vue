@@ -31,7 +31,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="q-button">Play Again</button>
+      <button @click="resetScreen()" class="q-button">Play Again</button>
     </div>
   </div>
 </template>
@@ -44,6 +44,11 @@ export default {
     totalPoints: Number,
     questions: null,
     index: null,
+  },
+  methods: {
+    resetScreen() {
+      window.location.reload();
+    },
   },
 };
 </script>
