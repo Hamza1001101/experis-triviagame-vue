@@ -48,8 +48,10 @@ export default {
       category: "",
       difficulty: "",
       numberOfQuestions: null,
+      isClicked: false,
     };
   },
+
   async created() {
     await this.getCategories();
   },
@@ -68,6 +70,10 @@ export default {
       ) {
         return alert("The query is incomplete. Please fill out every field.");
       }
+      if (this.isClicked) {
+        return alert("The data is already fetched!");
+      }
+
       let gameParams = {
         difficulty: this.difficulty,
         category: this.category,
@@ -77,7 +83,7 @@ export default {
       this.$emit("params-submitted", gameParams);
 
       this.fetchQuestions();
-
+      this.isClicked = true;
       //clear out data
       this.category = "";
       this.difficulty = "";
@@ -112,7 +118,8 @@ export default {
       //data display
       let dataquestions = this.questions; //.results;
       this.$emit("questions-submitted", dataquestions);
-      console.log("modified questions", this.questions);
+
+      //console.log("modified questions", this.questions);
     },
     getLevel() {
       return this.difficulty;

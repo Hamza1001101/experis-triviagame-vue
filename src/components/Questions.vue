@@ -76,23 +76,7 @@ export default {
         this.score++;
         this.points += 10;
       }
-      console.log("quizIndex", this.quizIndex);
-
-      //console.log("This is userResponse=", userResponse);
-      //console.log("This is the correct answer", correctAnswer);
-      //console.log(this.getQuestionLength());
     },
-    /*getQuestionLength() {
-      let index = 0;
-      for (let i = 0; i < this.quiz.length; i++) {
-        index++;
-      }
-      this.numberOfQuestions = index;
-      return this.numberOfQuestions;
-    },
-    prev() {
-      this.quizIndex--;
-    },*/
   },
 };
 </script>

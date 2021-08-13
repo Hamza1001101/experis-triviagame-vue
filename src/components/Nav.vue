@@ -6,7 +6,7 @@
           <a href="#"> TriviaApp</a>
         </li>
       </ul>
-      <ul class="navbar">
+      <!-- <ul class="navbar">
         <li>
           <a href="#">Start</a>
         </li>
@@ -16,7 +16,7 @@
         <li>
           <a href="#">Results</a>
         </li>
-      </ul>
+      </ul>-->
     </nav>
   </div>
 </template>
