@@ -1,8 +1,8 @@
 <template>
   <div class="result-wrapper">
-    <h3 class="result-header">Result component</h3>
-    <div>
-      <h5>Your score is</h5>
+    <h1 class="result-header">Result component</h1>
+    <div class="score-wrapper">
+      <h3>Your score is {{ score }}</h3>
       <p>
         You asnwered correct {{ score }} of possible
         {{ numberOfQuestions }} questions
@@ -14,11 +14,23 @@
       v-for="questionArr in questions"
       :key="questionArr"
     >
-      <h4>List of all the questions and thier correct answers</h4>
-      <div v-for="question in questionArr" :key="question">
-        <p>{{ question.question }}</p>
-        --> {{ question.correct_answer }}
-      </div>
+      <h3>List of all the questions and thier correct answers</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>No:</th>
+            <th>Question</th>
+            <th>Correct Answer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(question, index) in questionArr" :key="question">
+            <td>{{ index + 1 }}</td>
+            <td>{{ question.question }}</td>
+            <td>{{ question.correct_answer }}</td>
+          </tr>
+        </tbody>
+      </table>
       <button class="q-button">Play Again</button>
     </div>
   </div>
@@ -43,7 +55,7 @@ export default {
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-row-gap: 2rem;
+  grid-gap: 2rem;
 }
 .result-header {
   grid-column: 1/-1;
@@ -51,8 +63,26 @@ export default {
 }
 .questions-wrapper {
   border: 1px red solid;
+  padding: 1rem;
 }
 .q-button {
   background-color: rebeccapurple;
+  margin: 2rem 0;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td,
+th {
+  border: 1px solid #dddd;
+  text-align: center;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.score-wrapper {
+  border: 1px solid red;
 }
 </style>

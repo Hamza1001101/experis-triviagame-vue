@@ -28,6 +28,7 @@
           id="num-of-questions"
           placeholder="Number of questions"
           min="1"
+          max="50"
           type="number"
           v-model.number="numberOfQuestions"
         />

@@ -63,6 +63,7 @@ li {
   text-align: center;
   margin-top: 4rem;
 }
+
 button {
   cursor: pointer;
   display: inline-block;

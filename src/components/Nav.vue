@@ -37,7 +37,7 @@ export default {};
   justify-content: space-between;
 }
 .logo > li > a {
-  color: #a31621;
+  color: #e55812;
   font-weight: bold;
 }
 .navbar > li > a {
@@ -45,6 +45,9 @@ export default {};
   font-weight: bold;
 }
 .navbar > li > a:hover {
-  color: #f02d3a;
+  color: #e55812;
+}
+.logo > li > a:hover {
+  color: #738290;
 }
 </style>
