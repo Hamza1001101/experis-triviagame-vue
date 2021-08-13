@@ -124,8 +124,9 @@ select,
 input {
   padding: 12px;
   width: 14rem;
-  background-color: #cedada;
+  background-color: #f8f8ec;
   border: none;
+  font-size: 15px;
 }
 
 .form-wrapper {
@@ -134,21 +135,5 @@ input {
   justify-content: space-around;
   margin: 0 auto;
   margin-top: 10rem;
-}
-
-button {
-  cursor: pointer;
-  display: inline-block;
-  background: #73eedc;
-  color: #333;
-  border: 0;
-  padding: 12px;
-  width: 11rem;
-}
-button:focus {
-  outline: none;
-}
-button:hover {
-  transform: scale(0.98);
 }
 </style>

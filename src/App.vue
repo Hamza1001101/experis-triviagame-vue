@@ -20,7 +20,6 @@ export default {
   components: {
     Nav,
     StartGame,
-
     Questions,
     // Form
   },
@@ -47,7 +46,7 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #fffcf7;
+  background-color: #eceeef;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 a {
@@ -63,5 +62,21 @@ li {
 .header {
   text-align: center;
   margin-top: 4rem;
+}
+button {
+  cursor: pointer;
+  display: inline-block;
+  background: #e55812;
+  color: #fff;
+  font-size: 15px;
+  border: 0;
+  padding: 12px;
+  width: 11rem;
+}
+button:focus {
+  outline: none;
+}
+button:hover {
+  transform: scale(0.98);
 }
 </style>

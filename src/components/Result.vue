@@ -1,28 +1,25 @@
-<!-- This file is just for testing only. We are not using this file at the moment 
- If you want to can completely delete all the code that is inside this file. 
--->
 <template>
-  <div>
+  <div class="result-wrapper">
+    <h3 class="result-header">Result component</h3>
     <div>
-      <h3>Simple Quiz</h3>
-
-      <div class="question" v-for="questions in quiz" :key="questions">
-        <div class="q-container" v-for="(q, index) in questions" :key="q">
-          <div class="q-wrapper" v-show="index === quizIndex">
-            <p>{{ q.question }}</p>
-            <label :for="key" v-for="(answer, key) in q.answers" :key="answer">
-              <!--<input type="radio" id="#" />-->
-              <button
-                :id="key"
-                :value="key"
-                @click="checkAnswer($event), next()"
-              >
-                {{ answer }}
-              </button>
-            </label>
-          </div>
-        </div>
+      <h5>Your score is</h5>
+      <p>
+        You asnwered correct {{ score }} of possible
+        {{ numberOfQuestions }} questions
+      </p>
+      <p>Your total points are {{ totalPoints }}</p>
+    </div>
+    <div
+      class="questions-wrapper"
+      v-for="questionArr in questions"
+      :key="questionArr"
+    >
+      <h4>List of all the questions and thier correct answers</h4>
+      <div v-for="question in questionArr" :key="question">
+        <p>{{ question.question }}</p>
+        --> {{ question.correct_answer }}
       </div>
+      <button class="q-button">Play Again</button>
     </div>
   </div>
 </template>
@@ -30,37 +27,32 @@
 export default {
   name: "Result",
   props: {
-    data: null,
-  },
-  data() {
-    return {
-      quiz: this.data,
-      selectedAnswer: "",
-      quizIndex: 0,
-      count: this.data.length,
-      correctAnswer: 0,
-      wrongAnswer: 0,
-    };
-  },
-  methods: {
-    test() {
-      console.log("Iam array= ", this.quiz);
-    },
-    checkAnswer(e) {
-      this.selectedAnswer = e.target.value;
-      if (
-        this.selectedAnswer === this.quiz[this.quizIndex][this.correctAnswer]
-      ) {
-        console.log("Weeeey");
-      }
-      //console.log(this.selectedAnswer);
-    },
-    next() {
-      this.quizIndex++;
-      this.selectedAnswer = "";
-    },
+    score: null,
+    numberOfQuestions: Number,
+    totalPoints: Number,
+    questions: null,
+    index: null,
   },
 };
 </script>
 <style scoped>
+.result-wrapper {
+  border: 1px solid blue;
+  padding: 1rem;
+  margin-top: 3.5rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 2rem;
+}
+.result-header {
+  grid-column: 1/-1;
+  justify-self: center;
+}
+.questions-wrapper {
+  border: 1px red solid;
+}
+.q-button {
+  background-color: rebeccapurple;
+}
 </style>
