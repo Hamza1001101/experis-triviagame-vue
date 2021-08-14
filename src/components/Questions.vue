@@ -2,28 +2,33 @@
   <div>
     <div class="quiz">
       <div class="q-wrapper" v-for="questions in quiz" :key="questions">
-        <div v-for="(q, index) in questions" :key="q">
+        <div v-for="(question, index) in questions" :key="question">
           <div class="quistion-container" v-show="index === quizIndex">
             <div class="extra-info">
-              <h4>Questions Component</h4>
+              <h4>Question</h4>
               <p>Question: {{ quizIndex + 1 }} / {{ questions.length }}</p>
             </div>
 
-            <p>{{ q.question }}</p>
+            <p>{{ question.question }}</p>
 
             <div class="answer-wrapper">
-              <label class="answers" v-for="m in q.answers" :key="m">
+              <label
+                class="answers"
+                v-for="answer in question.answers"
+                :key="answer"
+              >
                 <button
                   v-on:click="next($event)"
-                  v-bind:value="q.correct_answer"
+                  v-bind:value="question.correct_answer"
                   class="answer-button"
                 >
-                  {{ m }}
+                  {{ answer }}
                 </button>
               </label>
             </div>
           </div>
         </div>
+        <!-- Show results whene all questions got answered -->
         <div v-if="quizIndex === questions.length">
           <Result
             :numberOfQuestions="questions.length"
@@ -59,7 +64,9 @@ export default {
   },
 
   methods: {
-    //go to next page
+    /**
+     * Go to the next questions and calculate score
+     */
     next(e) {
       this.quizIndex++;
       let correctAnswer = e.target.value;

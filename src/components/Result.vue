@@ -1,20 +1,19 @@
 <template>
   <div class="result-wrapper">
-    <h1 class="result-header">Result component</h1>
+    <h1 class="result-header">Your Results</h1>
     <div class="score-wrapper">
-      <h3>Your score is {{ score }}</h3>
+      <h4>Your total score is {{ totalPoints }} points</h4>
       <p>
         You asnwered correct {{ score }} of possible
         {{ numberOfQuestions }} questions
       </p>
-      <p>Your total points are {{ totalPoints }}</p>
     </div>
     <div
       class="questions-wrapper"
       v-for="questionArr in questions"
       :key="questionArr"
     >
-      <h3>List of all the questions and thier correct answers</h3>
+      <h4>List of all the questions and thier correct answers</h4>
       <table>
         <thead>
           <tr>
@@ -31,7 +30,7 @@
           </tr>
         </tbody>
       </table>
-      <button @click="resetScreen()" class="q-button">Play Again</button>
+      <button @click="resetScreen()" class="replay-button">Play Again</button>
     </div>
   </div>
 </template>
@@ -46,6 +45,7 @@ export default {
     index: null,
   },
   methods: {
+    //Reset everything and reload the page.
     resetScreen() {
       window.location.reload();
     },
@@ -71,7 +71,7 @@ export default {
   box-shadow: 5px 5px 15px 5px #000000;
 }
 
-.q-button {
+.replay-button {
   background-color: rebeccapurple;
   margin: 2rem 0;
 }

@@ -1,7 +1,6 @@
 <template>
   <div>
-    <StartGame @params-submitted="addParam" @questions-submitted="showData" />
-    <!--<Questions :questionData="questions" />-->
+    <StartGame @questions-submitted="showData" />
     <Questions :questionData="questions" />
   </div>
 </template>
@@ -16,14 +15,10 @@ export default {
   },
   data() {
     return {
-      queries: [],
       questions: [],
     };
   },
   methods: {
-    addParam(query) {
-      this.queries.push(query);
-    },
     showData(query) {
       this.questions.push(query);
     },

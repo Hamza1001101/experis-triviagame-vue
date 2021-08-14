@@ -57,11 +57,15 @@ export default {
   },
 
   methods: {
+    /**
+     * Fetch all different categories.
+     */
     async getCategories() {
       const resp = await fetch("https://opentdb.com/api_category.php");
       const data = await resp.json();
       this.categories = data.trivia_categories;
     },
+
     onSubmit() {
       if (
         this.category == "" ||
@@ -74,14 +78,6 @@ export default {
         return alert("The data is already fetched!");
       }
 
-      let gameParams = {
-        difficulty: this.difficulty,
-        category: this.category,
-        numberOfQuestions: this.numberOfQuestions,
-      };
-      //send data to the parent component (App.vue)
-      this.$emit("params-submitted", gameParams);
-
       this.fetchQuestions();
 
       this.isClicked = true;
@@ -91,6 +87,9 @@ export default {
       this.numberOfQuestions = null;
     },
 
+    /**
+     * * Fetch questions based on criteria (category, level and limit).
+     */
     async fetchQuestions() {
       let level = this.getLevel().toLowerCase();
       let limit = this.numberOfQuestions;
@@ -107,7 +106,7 @@ export default {
       let jsonResponse = await resp.json();
       // manipulate questions
       let data = jsonResponse.results.map((question) => {
-        // put answers on question into single array
+        // put answers on question into single array and shuffle correct_answer
         question.answers = [
           question.correct_answer,
           ...question.incorrect_answers,
@@ -117,17 +116,13 @@ export default {
       // put data on questions property
       this.questions = data;
       //data display
-      let dataquestions = this.questions; //.results;
+      let dataquestions = this.questions;
       this.$emit("questions-submitted", dataquestions);
 
       console.log("modified questions", this.questions);
-      //this.goToQuestions();
     },
     getLevel() {
       return this.difficulty;
-    },
-    goToQuestions() {
-      this.$router.push("./about");
     },
   },
 };

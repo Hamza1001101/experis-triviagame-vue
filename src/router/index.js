@@ -1,26 +1,25 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/Home.vue";
+//import QuestionsPage from  "@/views/QuestionsPage.vue"
 
-//import About from  "@/views/About.vue"
-import Questions from '../components/Questions.vue'
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
     {
-        path: "/about",
-
-    name: "About",
-    component: Questions,
-  },
+        path: "/",
+        name: "Home",
+        component: Home,
+    },
+    {
+        path: "/questions-page",
+        name: "QuestionsPage",
+        props: true,
+        component: () => import('@/views/QuestionsPage.vue')
+    },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+    history: createWebHistory(),
+    routes,
 });
 
 export default router;
