@@ -10,6 +10,8 @@ Netlify
 ```
 ## Project Info
 An oline Trivia Game build with Vue.js Framework. 
+
+[The project is published on Netlify, Look it here](https://experis-triviagame.netlify.app)
 ### Compiles and hot-reloads for development
 ```
 yarn serve
